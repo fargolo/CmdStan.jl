@@ -120,6 +120,9 @@ function stan(
     end
     run(pipeline(`ls $(model.tmpdir)`))
   catch
+    Sys.islinux() && run(pipeline(`g++ --version`))
+    Sys.isapple() && run(pipeline(`clang++ --version`))
+    println()
     run(pipeline(`ls $(model.tmpdir)`))
     resfile2 = open("$(tmpmodelname)_make.log", "r")
     println("\n$(tmpmodelname)_mak.log")
