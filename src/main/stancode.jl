@@ -121,12 +121,12 @@ function stan(
     run(pipeline(`ls $(model.tmpdir)`))
   catch
     run(pipeline(`ls $(model.tmpdir)`))
-    resfile1 = open("$(tmpmodelname)_build.log", "r")
-    println("\n$(tmpmodelname)_build.log")
-    println(read(resfile1, String))
     resfile2 = open("$(tmpmodelname)_make.log", "r")
     println("\n$(tmpmodelname)_mak.log")
     println(read(resfile2, String))
+    resfile1 = open("$(tmpmodelname)_build.log", "r")
+    println("\n$(tmpmodelname)_build.log")
+    println(read(resfile1, String))
     println("\n")
     println("\nAn error occurred while compiling the Stan program.\n")
     print("Please check your Stan program in variable '$(model.name)' ")
@@ -135,12 +135,12 @@ function stan(
     error("Return code = -3");
   end
   
-  resfile1 = open("$(tmpmodelname)_build.log", "r")
-  println("\n$(tmpmodelname)_build.log")
-  println(read(resfile1, String))
   resfile2 = open("$(tmpmodelname)_make.log", "r")
   println("\n$(tmpmodelname)_make.log")
   println(read(resfile2, String))
+  resfile1 = open("$(tmpmodelname)_build.log", "r")
+  println("\n$(tmpmodelname)_build.log")
+  println(read(resfile1, String))
   println("\n")
   
   cd(model.tmpdir)
