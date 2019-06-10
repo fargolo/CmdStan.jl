@@ -132,7 +132,15 @@ function stan(
     println("Note that Stan does not handle blanks in path names.")
     error("Return code = -3");
   end
-        
+  
+  resfile1 = open("$(tmpmodelname)_build.log", "r")
+  println("\n$(tmpmodelname)_build.log")
+  println(read(resfile1, String))
+  resfile2 = open("$(tmpmodelname)_make.log", "r")
+  println("\n$(tmpmodelname)_mak.log")
+  println(read(resfile2, String))
+  println("\n")
+  
   cd(model.tmpdir)
   
   if data != Nothing && check_dct_type(data)
