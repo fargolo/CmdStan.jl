@@ -109,9 +109,6 @@ function stan(
   println()
   run(pipeline(`ls $(model.tmpdir)`))
   println()
-  #make_path = joinpath(CmdStanDir, "make")
-  #println(make_path)
-  #println()
   try
     if file_make_log
       run(pipeline(`make $(tmpmodelname)`,
@@ -121,11 +118,16 @@ function stan(
       run(pipeline(`make $(tmpmodelname)`,
         stderr="$(tmpmodelname)_build.log"))
     end
-    #run(pipeline(`ls`))
     run(pipeline(`ls $(model.tmpdir)`))
   catch
-    #run(pipeline(`ls`))
     run(pipeline(`ls $(model.tmpdir)`))
+    resfile1 = open("$(tmpmodelname)_build.log", "r")
+    println("\n$(tmpmodelname)_build.log")
+    println(read(resfile1, String))
+    resfile2 = open("$(tmpmodelname)_make.log", "r")
+    println("\n$(tmpmodelname)_mak.log")
+    println(read(resfile2, String))
+    println("\n")
     println("\nAn error occurred while compiling the Stan program.\n")
     print("Please check your Stan program in variable '$(model.name)' ")
     print("and the contents of $(tmpmodelname)_build.log.\n")
@@ -137,7 +139,7 @@ function stan(
   println("\n$(tmpmodelname)_build.log")
   println(read(resfile1, String))
   resfile2 = open("$(tmpmodelname)_make.log", "r")
-  println("\n$(tmpmodelname)_mak.log")
+  println("\n$(tmpmodelname)_make.log")
   println(read(resfile2, String))
   println("\n")
   
